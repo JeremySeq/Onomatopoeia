@@ -1,6 +1,7 @@
 package com.jeremyseq.onomatopoeia.mixin;
 
 import com.jeremyseq.onomatopoeia.TextRenderer;
+import com.jeremyseq.onomatopoeia.text_types.LightningText;
 import com.jeremyseq.onomatopoeia.text_types.VillagerText;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.sounds.SoundEvent;
@@ -16,6 +17,8 @@ public class PlaySoundMixin {
     public void playSound(double pX, double pY, double pZ, SoundEvent pSoundEvent, SoundSource pSource, float pVolume, float pPitch, boolean pDistanceDelay, long pSeed, CallbackInfo ci) {
         if (pSoundEvent.getLocation().toString().equals("minecraft:entity.villager.ambient")) {
             TextRenderer.addText(new VillagerText(pX, pY+1, pZ, 1));
+        } else if (pSoundEvent.getLocation().toString().equals("minecraft:entity.lightning_bolt.thunder")) {
+            TextRenderer.addText(new LightningText(pX, pY+10, pZ, 5));
         }
     }
 }
