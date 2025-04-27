@@ -74,6 +74,15 @@ public abstract class Text {
             poseStack.mulPose(renderManager.cameraOrientation());
 
             poseStack.mulPose(Axis.ZP.rotationDegrees(this.randomRotation));
+        } else {
+            // translate to base position
+            poseStack.translate(
+                    this.baseX - renderManager.camera.getPosition().x,
+                    this.baseY - renderManager.camera.getPosition().y,
+                    this.baseZ - renderManager.camera.getPosition().z
+            );
+
+            poseStack.mulPose(renderManager.cameraOrientation());
         }
 
         poseStack.scale(-0.025F, -0.025F, 0.025F);
