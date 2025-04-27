@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "com.jeremyseq.onomatopoeia.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "onomatopoeia.refmap.json",
+  "mixins": [
+  ],
+  "client": [
+    "EntityHurtMixin",
+    "ExplosionMixin"
+  ],
+  "minVersion": "0.8"
+}
