@@ -21,6 +21,7 @@ public class JumpOnSlimeText extends Text {
     private static final List<String> slimeTexts = new ArrayList<>();
 
     static {
+        // "§o" makes it italics
         slimeTexts.add("§oboing");
         slimeTexts.add("§obloop");
         slimeTexts.add("§osplat");
