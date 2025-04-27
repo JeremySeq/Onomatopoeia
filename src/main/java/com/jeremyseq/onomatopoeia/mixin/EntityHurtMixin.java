@@ -26,7 +26,7 @@ public abstract class EntityHurtMixin {
                 size = 1;
             }
             if (size > 0) {
-                TextRenderer.addText(new EntityHitText(entity.getX(), entity.getY(), entity.getZ(), size));
+                TextRenderer.addText(new EntityHitText(entity.getX(), entity.getEyeY(), entity.getZ(), size));
             }
         }
     }

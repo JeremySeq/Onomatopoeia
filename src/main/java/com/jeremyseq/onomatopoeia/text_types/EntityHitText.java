@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.world.phys.Vec2;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -36,6 +37,7 @@ public class EntityHitText extends Text {
         this.size = size;
         this.text = getRandomHitText();
         this.randomStretch = 1.0f + (new Random().nextFloat() - .5f) * 0.5f; // Random stretch between .75 and 1.25
+        this.setDuration(1000);
     }
 
     @Override
@@ -67,7 +69,7 @@ public class EntityHitText extends Text {
         } else {
             // shrinking/fading phase
             float fadeProgress = (elapsed - growDuration) / (duration - growDuration);
-            float shrinkFactor = 1.0f - 0.3f * fadeProgress; // shrink down to 70% at end
+            float shrinkFactor = 1.0f - fadeProgress; // shrink down to 0 at end
             size = this.size * shrinkFactor;
 
             alpha = 1.0f - fadeProgress; // fade alpha to 0 at end
@@ -97,5 +99,10 @@ public class EntityHitText extends Text {
     @Override
     public boolean doRandomizationRendering() {
         return true;
+    }
+
+    @Override
+    public Vec2 getRandomDriftSpeedYRange() {
+        return new Vec2(0, 0);
     }
 }

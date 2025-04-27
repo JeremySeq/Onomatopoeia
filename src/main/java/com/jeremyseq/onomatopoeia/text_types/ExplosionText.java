@@ -62,7 +62,7 @@ public class ExplosionText extends Text {
         long elapsed = timestamp - this.getTimestamp();
         float duration = this.getDuration(); // full duration
 
-        float growDuration = 200f; // fixed grow time
+        float growDuration = 400f; // fixed grow time
         float size;
         float alpha = 1.0f; // full opacity
 
@@ -84,13 +84,21 @@ public class ExplosionText extends Text {
             alpha = 1.0f - fadeProgress; // fade alpha to 0 at end
         }
 
+        float shakeX = 0;
+        float shakeY = 0;
+        if (elapsed < this.getDuration()/2) {
+            // calculate shake offsets
+            shakeX = (float) (Math.random() * 2 - 1) * 1.5f;
+            shakeY = (float) (Math.random() * 2 - 1) * 1.5f;
+        }
+
         poseStack.scale(size, size, size);
 
         int fadedColor = new Color(getColor().getRed(), getColor().getGreen(), getColor().getBlue(), (int) (alpha*255)).getRGB();
 
         // used to fix weird bug where the text is rendered with full opacity when opacity is 0
         if (alpha > 25/255f) {
-            fontRenderer.drawInBatch(text, -textWidth / 2f, -textHeight / 2f, fadedColor, false, poseStack.last().pose(), bufferSource, displayMode, 0, 15728880);
+            fontRenderer.drawInBatch(text, -textWidth / 2f + shakeX, -textHeight / 2f + shakeY, fadedColor, false, poseStack.last().pose(), bufferSource, displayMode, 0, 15728880);
         }
     }
 

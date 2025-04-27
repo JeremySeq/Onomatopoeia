@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
+import net.minecraft.world.phys.Vec2;
 
 import java.util.Random;
 
@@ -31,15 +32,16 @@ public abstract class Text {
         this.timestamp = System.currentTimeMillis();
 
         // random offsets
-        this.randomOffsetX = (random.nextFloat() - 0.5f) * .5f; // -0.25 to +0.25 blocks
-        this.randomOffsetY = (random.nextFloat() - 0.5f) * .5f;
-        this.randomOffsetZ = (random.nextFloat() - 0.5f) * .5f;
+        this.randomOffsetX = (random.nextFloat() - 0.5f) * this.getRandomOffsetRange()*2;
+        this.randomOffsetY = (random.nextFloat() - 0.5f) * this.getRandomOffsetRange()*2;
+        this.randomOffsetZ = (random.nextFloat() - 0.5f) * this.getRandomOffsetRange()*2;
 
         // random rotation
-        this.randomRotation = (random.nextFloat() - 0.5f) * 30f; // -15 to +15 degrees
+        this.randomRotation = (random.nextFloat() - 0.5f) * this.getRandomRotationRange()*2;
 
         // random drift upward speed
-        this.randomDriftSpeedY = 0.001f + random.nextFloat() * 0.002f; // 0.001 to 0.003 blocks per ms
+        this.randomDriftSpeedY = this.getRandomDriftSpeedYRange().x + random.nextFloat() *
+                (this.getRandomDriftSpeedYRange().y - this.getRandomDriftSpeedYRange().x);
     }
 
     public long getTimestamp() {
@@ -100,4 +102,28 @@ public abstract class Text {
      */
     public abstract boolean doRandomizationRendering(); //
 
+
+    /**
+     * Override this method to specify the range of random offsets.
+     * @return the range of random offsets in blocks, from -x to +x, -y to +y, -z to +z.
+     */
+    public float getRandomOffsetRange() {
+        return .25f;
+    }
+
+    /**
+     * Override this method to specify the range of random rotation.
+     * @return the range of random rotation in degrees, from -x to +x.
+     */
+    public float getRandomRotationRange() {
+        return 15f;
+    }
+
+    /**
+     * Override this method to specify the range of random upward drift speed.
+     * @return the range of random upward drift speed in blocks per second, from min to max.
+     */
+    public Vec2 getRandomDriftSpeedYRange() {
+        return new Vec2(.001f, .003f);
+    }
 }
