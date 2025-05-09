@@ -1,7 +1,9 @@
 package com.jeremyseq.onomatopoeia;
 
+import com.jeremyseq.onomatopoeia.overlay.NarrativeTextOverlay;
 import com.mojang.logging.LogUtils;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -39,6 +41,11 @@ public class Onomatopoeia {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
 
+        }
+
+        @SubscribeEvent
+        public static void registerGuiOverlays(RegisterGuiOverlaysEvent event) {
+            event.registerAboveAll("narrative_text", NarrativeTextOverlay.NARRATIVE_TEXT);
         }
     }
 }

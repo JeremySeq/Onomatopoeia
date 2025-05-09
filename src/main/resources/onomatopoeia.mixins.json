@@ -8,6 +8,7 @@
   "client": [
     "EntityHurtMixin",
     "ExplosionMixin",
+    "PlaceBlockMixin",
     "PlaySoundMixin",
     "SlimeBounceMixin"
   ],
