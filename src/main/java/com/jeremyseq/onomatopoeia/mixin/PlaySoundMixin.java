@@ -33,6 +33,8 @@ public class PlaySoundMixin {
             NarrativeTextOverlay.sendNarrativeEvent("warden_spawned");
         } else if (pSoundEvent.getLocation().toString().equals("minecraft:entity.ender_dragon.death")) {
             NarrativeTextOverlay.sendNarrativeEvent("ender_dragon_death");
+        } else if (pSoundEvent.getLocation().toString().equals("minecraft:event.raid.horn")) {
+            NarrativeTextOverlay.sendNarrativeEvent("raid_started");
         }
     }
 }
