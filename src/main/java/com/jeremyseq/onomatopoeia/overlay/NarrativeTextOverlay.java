@@ -4,6 +4,7 @@ import com.google.common.reflect.TypeToken;
 import com.google.gson.*;
 import net.minecraft.client.gui.Font;
 import net.minecraftforge.client.gui.overlay.IGuiOverlay;
+import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 import java.io.InputStreamReader;
@@ -20,6 +21,7 @@ public class NarrativeTextOverlay {
     private static final long VISIBLE_DURATION = 4000;
     private static final long FADE_OUT_DURATION = 1000;
 
+    public static final String DEFAULT_TYPE = "fun"; // this type should be available for every single event code
     public static String type = "fun";
 
     private static final Map<String, Map<String, List<String>>> narrativeEventMap;
@@ -36,7 +38,15 @@ public class NarrativeTextOverlay {
     }
 
     public static void sendNarrativeEvent(String eventCode) {
-        List<String> options = narrativeEventMap.get(eventCode).get(type);
+        if (!narrativeEventMap.containsKey(eventCode)) {
+            return;
+        }
+        List<String> options;
+        if (!narrativeEventMap.get(eventCode).containsKey(type)) {
+           options = narrativeEventMap.get(eventCode).get(DEFAULT_TYPE); // uses default type if the event code doesn't have the current type
+        } else {
+            options = narrativeEventMap.get(eventCode).get(type);
+        }
         if (options != null && !options.isEmpty()) {
             String selected = options.get(new Random().nextInt(options.size()));
             sendNarrativeText(selected);
@@ -62,22 +72,7 @@ public class NarrativeTextOverlay {
                 return;
             }
 
-            float alphaProgress;
-            if (timeSinceChange <= TRANSITION_DURATION) {
-                // fade in
-                alphaProgress = timeSinceChange / (float) TRANSITION_DURATION;
-            } else if (timeSinceChange <= TRANSITION_DURATION + VISIBLE_DURATION) {
-                // fully visible
-                alphaProgress = 1.0f;
-            } else {
-                // fade out
-                long fadeOutElapsed = timeSinceChange - TRANSITION_DURATION - VISIBLE_DURATION;
-                alphaProgress = 1.0f - (fadeOutElapsed / (float) FADE_OUT_DURATION);
-            }
-
-            alphaProgress = Math.max(0.0f, Math.min(alphaProgress, 1.0f));
-            int alpha = (int) (255 * alphaProgress);
-            Color color = new Color(255, 255, 255, alpha);
+            Color color = getColor(timeSinceChange);
 
             // slide in (optional, still during fade-in only)
             int targetY = 20;
@@ -98,4 +93,23 @@ public class NarrativeTextOverlay {
             }
         }
     });
+
+    private static @NotNull Color getColor(long timeSinceChange) {
+        float alphaProgress;
+        if (timeSinceChange <= TRANSITION_DURATION) {
+            // fade in
+            alphaProgress = timeSinceChange / (float) TRANSITION_DURATION;
+        } else if (timeSinceChange <= TRANSITION_DURATION + VISIBLE_DURATION) {
+            // fully visible
+            alphaProgress = 1.0f;
+        } else {
+            // fade out
+            long fadeOutElapsed = timeSinceChange - TRANSITION_DURATION - VISIBLE_DURATION;
+            alphaProgress = 1.0f - (fadeOutElapsed / (float) FADE_OUT_DURATION);
+        }
+
+        alphaProgress = Math.max(0.0f, Math.min(alphaProgress, 1.0f));
+        int alpha = (int) (255 * alphaProgress);
+        return new Color(255, 255, 255, alpha);
+    }
 }
