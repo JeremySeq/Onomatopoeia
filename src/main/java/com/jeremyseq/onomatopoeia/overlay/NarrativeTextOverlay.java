@@ -2,6 +2,7 @@ package com.jeremyseq.onomatopoeia.overlay;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gson.*;
+import com.jeremyseq.onomatopoeia.OnomatopoeiaConfig;
 import net.minecraft.client.gui.Font;
 import net.minecraftforge.client.gui.overlay.IGuiOverlay;
 import org.jetbrains.annotations.NotNull;
@@ -54,6 +55,7 @@ public class NarrativeTextOverlay {
     }
 
     private static void sendNarrativeText(String text) {
+        if (!OnomatopoeiaConfig.ENABLE_NARRATIVE_TEXT.get()) return;
         if (!text.equals(narrativeText)) {
             narrativeText = text;
             textChangeTime = System.currentTimeMillis();

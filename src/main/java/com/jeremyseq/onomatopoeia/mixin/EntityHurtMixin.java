@@ -1,5 +1,6 @@
 package com.jeremyseq.onomatopoeia.mixin;
 
+import com.jeremyseq.onomatopoeia.OnomatopoeiaConfig;
 import com.jeremyseq.onomatopoeia.TextRenderer;
 import com.jeremyseq.onomatopoeia.text_types.EntityHitText;
 import net.minecraft.client.Minecraft;
@@ -18,6 +19,7 @@ public abstract class EntityHurtMixin {
     @Inject(at = @At("HEAD"), method = "hurt")
     public void hurt(DamageSource pSource, float pAmount, CallbackInfoReturnable<Boolean> cir) {
         LivingEntity entity = (LivingEntity) (Object) this;
+        if (!OnomatopoeiaConfig.ENABLE_HIT_TEXT.get()) return;
         if (Minecraft.getInstance().player != null && entity.getId() != Minecraft.getInstance().player.getId()) {
             if (!Objects.equals(pSource.getMsgId(), "player")) return; // only render for player damage
 

@@ -1,5 +1,6 @@
 package com.jeremyseq.onomatopoeia.mixin;
 
+import com.jeremyseq.onomatopoeia.OnomatopoeiaConfig;
 import com.jeremyseq.onomatopoeia.TextRenderer;
 import com.jeremyseq.onomatopoeia.Util;
 import com.jeremyseq.onomatopoeia.overlay.NarrativeTextOverlay;
@@ -35,6 +36,7 @@ public abstract class PlaceBlockMixin {
 
     @Inject(at = @At("RETURN"), method = "place")
     public void onPlaceBlock2(BlockPlaceContext pContext, CallbackInfoReturnable<InteractionResult> cir) {
+        if (!OnomatopoeiaConfig.ENABLE_BLOCK_PLACE_TEXT.get()) return;
         // only run if block was actually placed
         if (cir.getReturnValue() == InteractionResult.sidedSuccess(true) && pContext.getPlayer() != null) {
             BlockState blockstate = this.getPlacementState(pContext);
