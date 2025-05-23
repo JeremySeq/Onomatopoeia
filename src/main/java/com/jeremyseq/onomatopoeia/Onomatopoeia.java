@@ -1,12 +1,16 @@
 package com.jeremyseq.onomatopoeia;
 
+import com.jeremyseq.onomatopoeia.overlay.NarrativeTextOverlay;
 import com.mojang.logging.LogUtils;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -20,6 +24,9 @@ public class Onomatopoeia {
 
     public Onomatopoeia() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, OnomatopoeiaConfig.SPEC, "onomatopoeia-client.toml");
+
         modEventBus.addListener(this::commonSetup);
         MinecraftForge.EVENT_BUS.register(this);
     }
@@ -39,6 +46,11 @@ public class Onomatopoeia {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
 
+        }
+
+        @SubscribeEvent
+        public static void registerGuiOverlays(RegisterGuiOverlaysEvent event) {
+            event.registerAboveAll("narrative_text", NarrativeTextOverlay.NARRATIVE_TEXT);
         }
     }
 }

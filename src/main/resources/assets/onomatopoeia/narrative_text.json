@@ -1,0 +1,96 @@
+{
+  "totem_used": {
+    "serious": [
+      "§o§6Death was denied... for now.",
+      "§o§6Fate blinked, and spared you.",
+      "§o§6Fate cheated once again.",
+      "§o§6A last breath... reclaimed."
+    ],
+    "fun": [
+      "§6ZAP! Totem says: 'Not today!'",
+      "§6PING! Extra life delivered!",
+      "§6WHOOSH! Dodged death like a pro!",
+      "§6POP! Back from the brink!"
+    ]
+  },
+  "wither_spawned": {
+    "serious": [
+      "§o§8A terrible presence fills the air.",
+      "§o§8The ground recoiled in terror."
+    ],
+    "fun": [
+      "§8KA-BOOOOM! The Wither cometh!",
+      "§8CRACKLE-ROAR! Hope you brought backup!"
+    ]
+  },
+  "warden_spawned": {
+    "serious": [
+      "§o§9From the dark, it emerged... sensing every step.",
+      "§o§8A breathless silence falls... then, a tremor.",
+      "§o§9It hears your heartbeat... it is coming.",
+      "§o§1You were not meant to disturb this place.",
+      "§o§8Something ancient stirs beneath your feet.",
+      "§o§9Your courage fades as the ground begins to rumble.",
+      "§o§8Every move echoes like a scream down here."
+    ],
+    "fun": [
+      "§9THUMP! THUMP! Something big just clocked in!",
+      "§8BOOF! You woke the sleepy beef!",
+      "§9SNIFF-SNARL! It knows you're here!",
+      "§1GLOMP! Not a hugger, btw.",
+      "§8BOOM-STEP! He's thicc and ticked!",
+      "§9RUMBLE-RUMBLE! Time to regret your choices!",
+      "§8ECHOES OF DOOM! That ain't the wind!"
+    ]
+  },
+  "ender_dragon_death": {
+    "serious": [
+      "§o§5The sky shatters with her final cry.",
+      "§o§5The end is... ending.",
+      "§o§5A legend dies, and the void breathes again.",
+      "§o§5Victory echoes across dimensions."
+    ],
+    "fun": [
+      "§5KA-KRAKKOOM! Down she goes!",
+      "§5BLAMMO! Dragon no more!",
+      "§5BOOM! Wings clipped. World saved!",
+      "§5CRASH-ZAP! That’s one for the history books!"
+    ]
+  },
+  "raid_started": {
+    "serious": [
+      "§o§4The warhorns echo — they are coming.",
+      "§o§4Shields up. The storm begins.",
+      "§o§4Blood and bells. A village under siege."
+    ],
+    "fun": [
+      "§4HONK-HONK! Pillager party incoming!",
+      "§4BZZZT! Sirens blare — it’s raid o’clock!",
+      "§4DING-DING! Trouble at the front gate!"
+    ]
+  },
+  "nether_portal_activated": {
+    "serious": [
+      "§o§5The veil thins. A passage opens.",
+      "§o§5The portal hums with ancient hunger.",
+      "§o§5You invite the inferno."
+    ],
+    "fun": [
+      "§5WHOOM-WHOOM! Welcome to spicy hell!",
+      "§5BWAAAAHH! The portal awakens!",
+      "§5ZZZT! Gateway to hot mess opened!"
+    ]
+  },
+  "dragon_head_placed": {
+    "serious": [
+      "§o§5Mockery of a beast long dead.",
+      "§o§5Its jaws move, but its hunger is gone.",
+      "§o§5A trophy... or a warning?"
+    ],
+    "fun": [
+      "§5CLACK-CLACK! That thing’s still twitching!",
+      "§5CHOMP-CHOMP! It’s all jaw, no bite!",
+      "§5CLICK! Stylish and slightly cursed!"
+    ]
+  }
+}

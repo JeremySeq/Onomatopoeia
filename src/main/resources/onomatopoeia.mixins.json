@@ -7,7 +7,10 @@
   ],
   "client": [
     "EntityHurtMixin",
-    "ExplosionMixin"
+    "ExplosionMixin",
+    "PlaceBlockMixin",
+    "PlaySoundMixin",
+    "SlimeBounceMixin"
   ],
   "minVersion": "0.8"
 }
